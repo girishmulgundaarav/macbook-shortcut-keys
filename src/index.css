@@ -1,0 +1,711 @@
+/* Modern Web Design Tokens & Theme Configuration */
+:root {
+  /* Light Theme (Default) */
+  --bg-app: #f5f5f7;
+  --bg-header: rgba(245, 245, 247, 0.75);
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --border-card: rgba(255, 255, 255, 0.4);
+  --border-element: #e5e5ea;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+  --accent: #0071e3;
+  --accent-rgb: 0, 113, 227;
+  --accent-gradient: linear-gradient(135deg, #0071e3, #3a97ff);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
+  
+  /* Keyboard styling */
+  --keyboard-bg: #e8e8ed;
+  --keyboard-border: #d1d1d6;
+  --key-bg: #ffffff;
+  --key-text: #1d1d1f;
+  --key-subtext: #86868b;
+  --key-shadow: 0 2px 0 #c7c7cc, 0 1px 1px rgba(0, 0, 0, 0.15);
+  --key-hover-bg: #f5f5f7;
+  --key-active-bg: #0071e3;
+  --key-active-text: #ffffff;
+  --key-highlight-bg: rgba(0, 113, 227, 0.12);
+  --key-highlight-border: #0071e3;
+  --key-highlight-shadow: 0 2px 0 #005bb5, 0 1px 1px rgba(0, 0, 0, 0.15);
+  
+  --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: all 0.15s ease;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --bg-app: #0d0d0f;
+  --bg-header: rgba(13, 13, 15, 0.75);
+  --bg-card: rgba(22, 22, 26, 0.65);
+  --border-card: rgba(255, 255, 255, 0.06);
+  --border-element: #2c2c2e;
+  --text-primary: #f5f5f7;
+  --text-secondary: #8e8e93;
+  --accent: #2997ff;
+  --accent-rgb: 41, 151, 255;
+  --accent-gradient: linear-gradient(135deg, #2997ff, #64afff);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.45);
+  
+  /* Keyboard styling */
+  --keyboard-bg: #1c1c1e;
+  --keyboard-border: #2c2c2e;
+  --key-bg: #2c2c2e;
+  --key-text: #f5f5f7;
+  --key-subtext: #8e8e93;
+  --key-shadow: 0 2px 0 #111112, 0 1px 1px rgba(0, 0, 0, 0.4);
+  --key-hover-bg: #3a3a3c;
+  --key-active-bg: #2997ff;
+  --key-active-text: #0d0d0f;
+  --key-highlight-bg: rgba(41, 151, 255, 0.18);
+  --key-highlight-border: #2997ff;
+  --key-highlight-shadow: 0 2px 0 #006ddb, 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(134, 134, 139, 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(134, 134, 139, 0.5);
+}
+
+/* Layout Container */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 60px;
+}
+
+/* Glassmorphism panel helper */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* Header design */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-card);
+  background: var(--bg-header);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 24px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Theme Toggle button */
+.icon-btn {
+  background: none;
+  border: 1px solid var(--border-element);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 18px;
+  transition: var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background: var(--key-hover-bg);
+  border-color: var(--text-secondary);
+}
+
+/* Hero Section */
+.hero-section {
+  max-width: 1200px;
+  width: 90%;
+  margin: 40px auto 24px auto;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Keyboard Panel Wrapper */
+.keyboard-section {
+  max-width: 1040px;
+  width: 90%;
+  margin: 0 auto 32px auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.keyboard-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.active-modifiers {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.modifier-pill {
+  padding: 4px 10px;
+  background: var(--border-element);
+  color: var(--text-primary);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition-fast);
+}
+
+.modifier-pill.active {
+  background: var(--accent);
+  color: var(--key-active-text);
+}
+
+/* macOS Keyboard Layout */
+.keyboard-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.keyboard {
+  background: var(--keyboard-bg);
+  border: 1px solid var(--keyboard-border);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 950px;
+  min-width: 950px;
+  user-select: none;
+}
+
+.kb-row {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.key {
+  background: var(--key-bg);
+  color: var(--key-text);
+  border: none;
+  height: 52px;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 6px 8px;
+  box-shadow: var(--key-shadow);
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.05s, box-shadow 0.15s;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.key:hover {
+  background: var(--key-hover-bg);
+}
+
+.key:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--keyboard-border);
+}
+
+.key-symbol {
+  font-size: 15px;
+  align-self: flex-end;
+}
+
+.key-label {
+  font-size: 10px;
+  color: var(--key-subtext);
+}
+
+/* Modifiers / Special Key States */
+.key.modifier-active {
+  background: var(--key-active-bg) !important;
+  color: var(--key-active-text) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.key.modifier-active .key-label {
+  color: inherit;
+  opacity: 0.8;
+}
+
+/* Highlighted keys (when hovered card) */
+.key.key-highlighted {
+  background: var(--key-highlight-bg) !important;
+  color: var(--key-highlight-border) !important;
+  outline: 2px solid var(--key-highlight-border);
+  box-shadow: var(--key-highlight-shadow) !important;
+  z-index: 10;
+}
+
+.key.key-highlighted .key-label {
+  color: var(--key-highlight-border);
+}
+
+/* Width multipliers for specific keyboard keys */
+.key-esc { flex-grow: 1.2; }
+.key-tab { flex-grow: 1.5; }
+.key-caps { flex-grow: 1.8; }
+.key-lshift { flex-grow: 2.3; }
+.key-rshift { flex-grow: 2.3; }
+.key-ctrl { flex-grow: 1.2; }
+.key-opt { flex-grow: 1.2; }
+.key-cmd { flex-grow: 1.4; }
+.key-space { flex-grow: 7.5; }
+.key-delete { flex-grow: 1.6; align-items: flex-end; }
+.key-return { flex-grow: 1.8; align-items: flex-end; }
+.key-fn { flex-grow: 1.1; }
+
+.key-arrow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1.2 1.2 0;
+  height: 52px;
+}
+
+.key-arrow-stacked {
+  display: flex;
+  gap: 2px;
+  height: 25px;
+  width: 100%;
+}
+
+.key-arrow {
+  height: 25px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.key-arrow-stacked .key-arrow {
+  height: 100%;
+}
+
+/* Main Content Section */
+.content-section {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+}
+
+/* Search Bar Wrapper */
+.search-container {
+  grid-column: span 2;
+  position: relative;
+  width: 100%;
+}
+
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 20px 16px 52px;
+  border-radius: 12px;
+  border: 1px solid var(--border-element);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: var(--font-body);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.15), var(--shadow-hover);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 20px;
+  background: var(--border-element);
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 12px;
+  transition: var(--transition-fast);
+}
+
+.clear-search-btn:hover {
+  background: var(--text-secondary);
+  color: var(--bg-app);
+}
+
+/* Sidebar Navigation (macOS settings style) */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-heading {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 0 12px 8px 12px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.sidebar-btn:hover {
+  background: var(--border-element);
+}
+
+.sidebar-btn.active {
+  background: var(--accent);
+  color: var(--key-active-text);
+}
+
+.sidebar-icon {
+  font-size: 16px;
+}
+
+.sidebar-badge {
+  margin-left: auto;
+  font-size: 11px;
+  padding: 2px 6px;
+  background: rgba(134, 134, 139, 0.15);
+  border-radius: 10px;
+  color: inherit;
+}
+
+.sidebar-btn.active .sidebar-badge {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Shortcut Cards Grid */
+.shortcuts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.no-results-icon {
+  font-size: 48px;
+}
+
+.no-results-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.no-results-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Shortcut Card component */
+.shortcut-card {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.shortcut-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.shortcut-card-cat {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.shortcut-card-desc {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.shortcut-card-keys {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Visual Keyboard Keycaps */
+.keycap {
+  background: var(--key-bg);
+  border: 1px solid var(--border-element);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: var(--kbd-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  transition: var(--transition-fast);
+}
+
+.keycap-plus {
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.shortcut-card:hover .keycap {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.15);
+}
+
+/* Favorite Button */
+.fav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.fav-btn:hover {
+  color: #ffb703;
+  transform: scale(1.15);
+  background: rgba(255, 183, 3, 0.1);
+}
+
+.fav-btn.active {
+  color: #ffb703;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .search-container {
+    grid-column: span 1;
+  }
+  
+  .sidebar {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 8px 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .sidebar-heading {
+    display: none;
+  }
+  
+  .sidebar-btn {
+    white-space: nowrap;
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .hero-subtitle {
+    font-size: 15px;
+  }
+  
+  .keyboard-section {
+    padding: 16px;
+  }
+  
+  .shortcut-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .shortcut-card-keys {
+    align-self: flex-end;
+  }
+}
